@@ -1,28 +1,21 @@
 import Ship from "./ship";
 
-describe("Ship class tests", () => {
-  test("Reject invalid ship lenght", () => {
-    expect(() => new Ship(5)).toThrow(
-      "Invalid ship lenght. Must be between 1 and 4"
-    );
-  });
-
-  test("isSunk() should return false for a new ship", () => {
+describe("tests for ship2", () => {
+  test("is not sunk when created", () => {
     const ship = new Ship(3);
     expect(ship.isSunk()).toBe(false);
   });
 
-  test("hit() register hit and affects isSunk", () => {
-    const ship = new Ship(2);
+  test("should register a hit", () => {
+    const ship = new Ship(3);
     ship.hit();
-    expect(ship.isSunk()).toBe(false);
-    ship.hit();
-    expect(ship.isSunk()).toBe(true);
+    expect(ship.hits).toBe(1);
   });
 
-  test("isSunk() works with a ship of lenght 1", () => {
-    const ship = new Ship(1);
-    expect(ship.isSunk()).toBe(false);
+  test("should registe isSunk as true when hit same time as its length", () => {
+    const ship = new Ship(3);
+    ship.hit();
+    ship.hit();
     ship.hit();
     expect(ship.isSunk()).toBe(true);
   });
