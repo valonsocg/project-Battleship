@@ -66,4 +66,38 @@ describe("gameboard tests", () => {
     const gameboard = new Gameboard();
     expect(() => gameboard.receiveAttack([11, 11])).toThrow("Invalid hit!");
   });
+
+  test("allShipsSunked returns true when all ships are sunk", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(2); // Barco de 2 espacios
+    const ship2 = new Ship(3); // Barco de 3 espacios
+
+    gameboard.placeShip(ship1, [0, 0], "horizontal");
+    gameboard.placeShip(ship2, [1, 0], "horizontal");
+
+    // Hundir todos los barcos
+    gameboard.receiveAttack([0, 0]);
+    gameboard.receiveAttack([0, 1]);
+    gameboard.receiveAttack([1, 0]);
+    gameboard.receiveAttack([1, 1]);
+    gameboard.receiveAttack([1, 2]);
+
+    expect(gameboard.allShipsSunked()).toBe(true);
+  });
+
+  test("allShipsSunked returns false when some ships are still afloat", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(2); // Barco de 2 espacios
+    const ship2 = new Ship(3); // Barco de 3 espacios
+
+    gameboard.placeShip(ship1, [0, 0], "horizontal");
+    gameboard.placeShip(ship2, [1, 0], "horizontal");
+
+    // Solo hundimos parte de los barcos
+    gameboard.receiveAttack([0, 0]);
+    gameboard.receiveAttack([0, 1]);
+    gameboard.receiveAttack([1, 0]);
+
+    expect(gameboard.allShipsSunked()).toBe(false);
+  });
 });
