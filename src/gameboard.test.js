@@ -69,13 +69,12 @@ describe("gameboard tests", () => {
 
   test("allShipsSunked returns true when all ships are sunk", () => {
     const gameboard = new Gameboard();
-    const ship1 = new Ship(2); // Barco de 2 espacios
-    const ship2 = new Ship(3); // Barco de 3 espacios
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(3);
 
     gameboard.placeShip(ship1, [0, 0], "horizontal");
     gameboard.placeShip(ship2, [1, 0], "horizontal");
 
-    // Hundir todos los barcos
     gameboard.receiveAttack([0, 0]);
     gameboard.receiveAttack([0, 1]);
     gameboard.receiveAttack([1, 0]);
@@ -87,13 +86,12 @@ describe("gameboard tests", () => {
 
   test("allShipsSunked returns false when some ships are still afloat", () => {
     const gameboard = new Gameboard();
-    const ship1 = new Ship(2); // Barco de 2 espacios
-    const ship2 = new Ship(3); // Barco de 3 espacios
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(3);
 
     gameboard.placeShip(ship1, [0, 0], "horizontal");
     gameboard.placeShip(ship2, [1, 0], "horizontal");
 
-    // Solo hundimos parte de los barcos
     gameboard.receiveAttack([0, 0]);
     gameboard.receiveAttack([0, 1]);
     gameboard.receiveAttack([1, 0]);
