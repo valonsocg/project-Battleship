@@ -14,9 +14,12 @@ export default class Player {
     return opponentGameboard.receiveAttack(coord);
   }
 
-  getRandomCoord(size) {
-    const x = Math.floor(Math.random() * size);
-    const y = Math.floor(Math.random() * size);
+  getRandomCoord(size, attackedCoords = []) {
+    let x, y;
+    do {
+      x = Math.floor(Math.random() * size);
+      y = Math.floor(Math.random() * size);
+    } while (attackedCoords.some((coord) => coord[0] === x && coord[1] === y));
     return [x, y];
   }
 }

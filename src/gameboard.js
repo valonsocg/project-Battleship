@@ -68,7 +68,8 @@ export default class Gameboard {
 
   isShipAt(coord, orientation, row, col) {
     const [x, y] = coord;
-    const { length } = this.ships.find((ship) => ship.coord === coord).ship;
+    const ship = this.ships.find((ship) => ship.coord === coord);
+    const { length } = ship.ship;
 
     for (let i = 0; i < length; i++) {
       const shipRow = orientation === "horizontal" ? x : x + i;
@@ -83,7 +84,7 @@ export default class Gameboard {
   }
 
   allShipsSunked() {
-    if (this.ships.length === 0) return false;
+    if (this.ships.length === 0) return true;
     return this.ships.every(({ ship }) => ship.isSunk());
   }
 }
